@@ -1,10 +1,22 @@
+import SettingContent from "@/components/hcm/settings/setting-content";
+import SettingsSideMenu from "@/components/hcm/settings/side-menu";
+import { Menu } from "lucide-react";
+
 export default function Page() {
     return (
-      <main className="flex items-center justify-center h-screen">
-        
-        <div className="flex-col">
-          <h1 className="text-7xl font-bold">Settings Home</h1>
+      <main className="flex-col h-screen">
+        <nav className="flex w-full py-2.5 shadow-sm px-2.5">
+          <div className="flex-1 w-full">
+            <h2 className="font-mono text-xl font-bold tracking-wider">HCM</h2>
           </div>
+          <div className="flex-1 w-full flex justify-end">
+              <Menu />
+          </div>
+        </nav>
+        <div className="flex">
+        <SettingsSideMenu />
+        <SettingContent />
+        </div>
       </main>
     );
   }
