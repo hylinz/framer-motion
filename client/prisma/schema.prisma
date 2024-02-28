@@ -32,11 +32,10 @@ model Image {
 
 model GlobalSiteConfiguration {
   id          String   @id @default(uuid()) @map("_id")
-  title       String
-  description String
-  slogan      String
-  robotsTxt   String
-  maintenance Boolean
+  title       String  @default("This is a title")
+  description String @default("This is a description")
+  robotsTxt   String? @default("User-agent: *\nDisallow: /")
+  maintenance Boolean? @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

@@ -1,39 +1,32 @@
-
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+"use client"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
+import { GeneralSettings } from "./general-settings";
+import { useState } from "react";
 
 
-const GeneralSettings = () => {
-  return (
-    <div className="w-full h-full flex-col">
-      <div className="flex-col">
-        <h2 className="font-bold text-xl">General Settings</h2>
-        <p className="font-light text-sm">Change your general settings here.</p>
-      </div>
-      <Label>Site title</Label>
-      <Input name="title" />
-      <Label>Site description</Label>
-      <Textarea />
-    </div>
-  );
-}
-
-
-export default function SettingContent() {
+export default function SettingContent() {  
   return (
     <section className="w-full">
       <Tabs defaultValue="general">
         <TabsList className="w-full bg-primary/10 rounded">
-          <TabsTrigger value="general">General</TabsTrigger>
-          <TabsTrigger value="site">Site</TabsTrigger>
+          <TabsTrigger value="general" className="w-full">
+            General
+          </TabsTrigger>
+          <TabsTrigger value="site" className="w-full">
+            Site
+          </TabsTrigger>
+          <TabsTrigger value="advanced" className="w-full">
+            Advanced
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="general">
           <GeneralSettings />
         </TabsContent>
         <TabsContent value="site">
-
+          <p>hello</p>
+        </TabsContent>
+        <TabsContent value="advanced">
+          <p>hello</p>
         </TabsContent>
       </Tabs>
     </section>

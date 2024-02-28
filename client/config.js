@@ -1,0 +1,1 @@
+export const config = {"id":"13b58820-08db-490c-852f-771eec39afaf","title":"testeqata","description":"aetaet","robotsTxt":"User-agent: *\nDisallow: /","maintenance":false,"createdAt":"2024-02-28T11:28:33.479Z","updatedAt":"2024-02-28T12:04:11.822Z"}

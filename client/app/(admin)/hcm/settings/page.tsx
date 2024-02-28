@@ -1,6 +1,6 @@
 import SettingContent from "@/components/hcm/settings/setting-content";
 import SettingsSideMenu from "@/components/hcm/settings/side-menu";
-import { Menu } from "lucide-react";
+import { ModeToggle } from "@/components/ui/theme-toggle";
 
 export default function Page() {
     return (
@@ -10,7 +10,7 @@ export default function Page() {
             <h2 className="font-mono text-xl font-bold tracking-wider">HCM</h2>
           </div>
           <div className="flex-1 w-full flex justify-end">
-              <Menu />
+              {/* <ModeToggle /> */}
           </div>
         </nav>
         <div className="flex">

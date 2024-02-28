@@ -1,10 +1,1 @@
-export const config = {
-    id: "1",
-    title: "My Blog",
-    description: "A blog about programming and stuff",
-    slogan: "Programming is fun",
-    robotsTxt: "User-agent: *\nDisallow: /",
-    maintenance: true,
-    createdAt: "2021-06-01T00:00:00Z",
-    updatedAt: "2021-06-01T00:00:00Z"
-}
+export const config = {"id":"13b58820-08db-490c-852f-771eec39afaf","title":"aefaefae2","description":"feafaefaef2","robotsTxt":"User-agent: *\nDisallow: /","maintenance":false,"createdAt":"2024-02-28T11:28:33.479Z","updatedAt":"2024-02-28T12:11:31.035Z"}
