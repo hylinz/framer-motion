@@ -1,8 +1,6 @@
 "use client";
-
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { FiMoon, FiSun } from "react-icons/fi";
 
 const TOGGLE_CLASSES =
@@ -36,8 +34,9 @@ const SliderToggle = ({
           setTheme("light");
         }}
       >
-        <FiMoon className="relative z-10 text-lg md:text-sm" />
-        <span className="relative z-10">Light</span>
+                <FiSun className="relative z-10 text-lg md:text-sm text-white" />
+
+        <span className="relative z-10 hidden md:inline-block">Light</span>
       </button>
       <button
         className={`${TOGGLE_CLASSES} ${
@@ -47,8 +46,10 @@ const SliderToggle = ({
           setTheme("dark");
         }}
       >
-        <FiSun className="relative z-10 text-lg md:text-sm" />
-        <span className="relative z-10">Dark</span>
+
+        <FiMoon className="relative z-10 text-lg md:text-sm text-secondary text-white" />
+
+        <span className="relative z-10 hidden md:inline-block">Dark</span>
       </button>
       <div
         className={`absolute inset-0 z-0 flex ${

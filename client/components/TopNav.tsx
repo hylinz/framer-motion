@@ -9,8 +9,8 @@ export default function TopNav() {
   // -> ScrollY = ScrollX, Anchors etc
   return (
     <>
-      <header className="flex w-full justify-end px-5 py-5 fixed top-0 bg-transparent z-20">
-        <div className="w-full flex-1 flex font-mono text-2xl uppercase tracking-widest">
+      <header className="flex w-full justify-end items-center px-5 py-5 fixed top-0 bg-transparent z-20">
+        <div className="w-full flex-1 flex font-mono font-bold text-xl md:text-2xl uppercase tracking-widest">
           Hylins
         </div>
         <div className="w-full flex-1 flex justify-end">

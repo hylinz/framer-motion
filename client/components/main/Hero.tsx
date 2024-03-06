@@ -1,12 +1,10 @@
 "use client";
-import {
-  motion,
-  useMotionValue,
-} from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import { useState } from "react";
 import HomePage from "./Home";
 import AboutPage from "./About";
 import ServicesPage from "./Services";
+import { Progress } from "@/components/ui/progress";
 
 const SPRING_OPTIONS = {
   type: "spring",
@@ -18,17 +16,17 @@ const DRAG_BUFFER = 50;
 const pages = [
   {
     name: "Home",
-    URL: "/",
+    URL: "",
     jsx: <HomePage />,
   },
   {
     name: "About",
-    URL: "/about",
+    URL: "#about",
     jsx: <AboutPage />,
   },
   {
     name: "Services",
-    URL: "/services",
+    URL: "#services",
     jsx: <ServicesPage />,
   },
 ];
@@ -41,6 +39,7 @@ export default function Hero() {
   const onDragEnd = () => {
     const x = dragX.get();
 
+    
     if (x <= -DRAG_BUFFER && pageIndex < pages.length - 1) {
       setPageIndex((pv) => pv + 1);
     } else if (x >= DRAG_BUFFER && pageIndex > 0) {
@@ -48,10 +47,10 @@ export default function Hero() {
     }
   };
 
-
-
   return (
     <div className="relative overflow-hidden ">
+      <Progress value={((pageIndex + 1) / (pages.length)) * 100} className="absolute top-0 h-[4px]" />
+
       <motion.div
         drag="x"
         dragConstraints={{
@@ -69,29 +68,50 @@ export default function Hero() {
         className="flex relative cursor-grab active:cursor-grabbing"
       >
         <Pages pageIndex={pageIndex} />
+
       </motion.div>
+        <Dots pageIndex={pageIndex} setPageIndex={setPageIndex} />
+
     </div>
   );
 }
 const Pages = ({ pageIndex }: { pageIndex: number }) => {
   return (
     <>
-      {pages.map((pages: {name: string, URL: string, jsx: JSX.Element}, i: number) => {
-        return (
-          <motion.div
-            key={i}
-            animate={{
-              scale: pageIndex === i ? 0.95 : 0.85,
-            }}
-            transition={SPRING_OPTIONS}
-            className="aspect-video w-screen shrink-0 h-screen"
-          >
-            {pages.jsx}
-          </motion.div>
-        );
-      })}
+      {pages.map(
+        (pages: { name: string; URL: string; jsx: JSX.Element }, i: number) => {
+          return (
+            <motion.div
+              key={i}
+              animate={{
+                scale: pageIndex === i ? 0.95 : 0.85,
+              }}
+              transition={SPRING_OPTIONS}
+              className="aspect-video w-screen shrink-0 h-screen"
+            >
+              {pages.jsx}
+            </motion.div>
+          );
+        }
+      )}
     </>
   );
 };
 
-
+const Dots = ({ pageIndex, setPageIndex }: { pageIndex: number, setPageIndex: React.Dispatch<React.SetStateAction<number>> }) => {
+    return (
+      <div className="md:flex hidden w-full justify-center gap-4 absolute bottom-1 z-10">
+        {pages.map((_, i) => {
+          return (
+            <button
+              key={i}
+              onClick={() => setPageIndex(i)}
+              className={`h-3 w-3 rounded-full transition-colors hover:cursor-pointer ${
+                i === pageIndex ? "bg-neutral-50" : "bg-neutral-500"
+              }`}
+            />
+          );
+        })}
+      </div>
+    );
+  };
