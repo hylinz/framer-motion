@@ -33,6 +33,10 @@
     --ring: 222.2 84% 4.9%;
  
     --radius: 0.5rem;
+    --sky: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 5%, rgba(171,96,26,1) 10%, rgba(218,142,71,1) 15%, rgba(78,142,72,1) 16%, rgba(151,255,141,1) 17%, rgba(183,235,247,1) 18%, rgba(68,187,214,1) 100%);
+  
+    --radiant: radial-gradient(circle, rgb(197, 230, 171) 0%, rgb(0, 0, 0) 100%);
+
   }
  
   .dark {
@@ -63,7 +67,14 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    --sky: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 5%, rgba(171,96,26,1) 10%, rgba(218,142,71,1) 15%, rgba(18,78,13,1) 16%, rgba(53,224,37,1) 17%, rgba(6,56,68,1) 18%, rgba(16,3,82,1) 100%);
+
+    --radiant: radial-gradient(circle, rgb(69, 101, 43) 0%, rgb(0, 0, 0) 100%);
   }
+
+
+
 }
  
 @layer base {
@@ -73,4 +84,32 @@
   body {
     @apply bg-background text-foreground;
   }
+  .bg-gradient-radial {
+    background-image: var(--radiant);
+    background-position: top;
+    background-size: 400% 400%;
+    animation: gradient-animation 20s linear infinite;
+  }
+
+  .bg-gradient-sky {
+    background-image: var(--sky);
+    background-position: top;
+  }
+  
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
+  .customOutline {
+    color: transparent;
+    -webkit-text-stroke-width: 2px;
+   -webkit-text-stroke-color: white;
+}
 }

@@ -1,0 +1,22 @@
+"use client";
+import { NavMenu } from "@/components/NavMenu";
+import ModeToggle from "./ui/theme-toggle";
+
+
+export default function TopNav() {
+
+
+  // -> ScrollY = ScrollX, Anchors etc
+  return (
+    <>
+      <header className="flex w-full justify-end px-5 py-5 fixed top-0 bg-transparent z-20">
+        <div className="w-full flex-1 flex font-mono text-2xl uppercase tracking-widest">
+          Hylins
+        </div>
+        <div className="w-full flex-1 flex justify-end">
+          <ModeToggle />
+        </div>
+      </header>
+    </>
+  );
+}

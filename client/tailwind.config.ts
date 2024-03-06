@@ -18,6 +18,11 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        'main': "url('/main.jpg')",
+        'radiant': 'var(--radiant)',
+        'sky': 'var(--sky)',
+      },
       fontFamily: {
         sans: ['var(--font-geist-sans)'],
         mono: ['var(--font-geist-mono)'],
