@@ -1,11 +1,16 @@
 "use client";
 import { motion, useMotionValue } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HomePage from "./Home";
 import AboutPage from "./About";
 import ServicesPage from "./Services";
 import { Progress } from "@/components/ui/progress";
-
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 const SPRING_OPTIONS = {
   type: "spring",
   mass: 3,
@@ -16,30 +21,64 @@ const DRAG_BUFFER = 50;
 const pages = [
   {
     name: "Home",
-    URL: "",
     jsx: <HomePage />,
   },
   {
-    name: "About",
-    URL: "#about",
-    jsx: <AboutPage />,
+    name: "Services",
+    jsx: <ServicesPage />,
   },
   {
-    name: "Services",
-    URL: "#services",
-    jsx: <ServicesPage />,
+    name: "About",
+    jsx: <AboutPage />,
   },
 ];
 
+
 export default function Hero() {
   const [pageIndex, setPageIndex] = useState(0);
-
   const dragX = useMotionValue(0);
+
+  
+  useEffect(() => {
+    // if user presses right or left key, change page, use effect
+    const onKeyDown = (e: KeyboardEvent) => {
+      // return early if there are no pages ahead or behind and we are at the end or start
+      if (
+        (e.key === "ArrowRight" && pageIndex === pages.length - 1) ||
+        (e.key === "ArrowLeft" && pageIndex === 0) || (e.key !== "ArrowRight" && e.key !== "ArrowLeft")
+      ) {
+        return;
+      }
+
+      if (e.key === "ArrowRight" && pageIndex < pages.length - 1) {
+        setPageIndex((pv) => pv + 1);
+      } else if (e.key === "ArrowLeft" && pageIndex > 0) {
+        setPageIndex((pv) => pv - 1);
+      }
+    };
+    const onScroll = (e: WheelEvent) => {
+      e.preventDefault();
+      // Same as above, scroll up = increase pageIndex, scroll down = decrease pageIndex 
+      if (e.deltaY > 0 && pageIndex < pages.length - 1) {
+        setPageIndex((pv) => pv + 1);
+      } else if (e.deltaY < 0 && pageIndex > 0) {
+        setPageIndex((pv) => pv - 1);
+      }
+    } 
+
+
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("wheel", onScroll);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("wheel", onScroll);
+    };
+  }, [pageIndex]);
+
 
   const onDragEnd = () => {
     const x = dragX.get();
 
-    
     if (x <= -DRAG_BUFFER && pageIndex < pages.length - 1) {
       setPageIndex((pv) => pv + 1);
     } else if (x >= DRAG_BUFFER && pageIndex > 0) {
@@ -48,8 +87,12 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative overflow-hidden ">
-      <Progress value={((pageIndex + 1) / (pages.length)) * 100} className="absolute top-0 h-[4px]" />
+    <div className="relative overflow-x-hidden ">
+
+      <Progress
+        value={((pageIndex + 1) / pages.length) * 100}
+        className="absolute top-0 h-[4px]"
+      />
 
       <motion.div
         drag="x"
@@ -68,18 +111,17 @@ export default function Hero() {
         className="flex relative cursor-grab active:cursor-grabbing"
       >
         <Pages pageIndex={pageIndex} />
-
       </motion.div>
-        <Dots pageIndex={pageIndex} setPageIndex={setPageIndex} />
-
+      <Dots pageIndex={pageIndex} setPageIndex={setPageIndex} />
     </div>
   );
 }
+
 const Pages = ({ pageIndex }: { pageIndex: number }) => {
   return (
     <>
       {pages.map(
-        (pages: { name: string; URL: string; jsx: JSX.Element }, i: number) => {
+        (pages: { name: string; jsx: JSX.Element }, i: number) => {
           return (
             <motion.div
               key={i}
@@ -98,20 +140,33 @@ const Pages = ({ pageIndex }: { pageIndex: number }) => {
   );
 };
 
-const Dots = ({ pageIndex, setPageIndex }: { pageIndex: number, setPageIndex: React.Dispatch<React.SetStateAction<number>> }) => {
-    return (
-      <div className="md:flex hidden w-full justify-center gap-4 absolute bottom-1 z-10">
-        {pages.map((_, i) => {
-          return (
-            <button
-              key={i}
-              onClick={() => setPageIndex(i)}
-              className={`h-3 w-3 rounded-full transition-colors hover:cursor-pointer ${
-                i === pageIndex ? "bg-neutral-50" : "bg-neutral-500"
-              }`}
-            />
-          );
-        })}
-      </div>
-    );
-  };
+const Dots = ({
+  pageIndex,
+  setPageIndex,
+}: {
+  pageIndex: number;
+  setPageIndex: React.Dispatch<React.SetStateAction<number>>;
+}) => {
+  return (
+    <div className="md:flex hidden w-full justify-center gap-4 absolute bottom-2 z-10">
+      {pages.map((page, i) => {
+        return (
+          <TooltipProvider delayDuration={0} key={i}>
+            <Tooltip>
+              <TooltipTrigger>
+                <div
+                  key={i}
+                  onClick={() => setPageIndex(i)}
+                  className={`h-3 w-3 rounded-full transition-all hover:cursor-pointer  hover:scale-150 ${
+                    i === pageIndex ? "bg-primary scale-150" : "bg-primary/50"
+                  }`}
+                />
+              </TooltipTrigger>
+              <TooltipContent className="mb-2.5">{page.name}</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        );
+      })}
+    </div>
+  );
+};

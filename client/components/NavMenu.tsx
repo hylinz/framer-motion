@@ -2,7 +2,7 @@ import { useMotionValue, motion, useSpring, useTransform } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
-import ModeToggle from "./ui/theme-toggle";
+import { ModeToggle } from "./ui/theme-toggle";
 
 export const NavMenu = () => {
   const [open, setOpen] = useState(false);
