@@ -6,7 +6,7 @@ export default function TopNav() {
           Hylins
         </div>
         <div className="w-full flex-1 flex justify-end">
-          <ModeToggle />
+          {/* <ModeToggle /> */}
         </div>
       </header>
   );

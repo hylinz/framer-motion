@@ -1,9 +1,9 @@
 "use client";
 import { motion, useMotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
-import HomePage from "./Home";
-import AboutPage from "./About";
-import ServicesPage from "./Services";
+import HomePage from "@/components/main/Home";
+import AboutPage from "@/components/main/About";
+import ServicesPage from "@/components/main/Services";
 import { Progress } from "@/components/ui/progress";
 import {
   Tooltip,
@@ -24,13 +24,14 @@ const pages = [
     jsx: <HomePage />,
   },
   {
-    name: "Services",
-    jsx: <ServicesPage />,
-  },
-  {
     name: "About",
     jsx: <AboutPage />,
   },
+  {
+    name: "Services",
+    jsx: <ServicesPage />,
+  },
+
 ];
 
 

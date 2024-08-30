@@ -13,9 +13,9 @@ export function HomeTypewriter() {
         }}
         onInit={(typewriter) => {
           typewriter
-            .typeString("Hello Wolrd!")
+            .typeString("Hello Wolrd! El")
             .pauseFor(500)
-            .deleteChars(4)
+            .deleteChars(7)
             .typeString("rld!")
             .pauseFor(200)
             .typeString("<br />")

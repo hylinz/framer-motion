@@ -100,13 +100,13 @@
   .customOutlineLight {
     color: transparent;
     -webkit-text-stroke-width: 2px;
-   -webkit-text-stroke-color: #0F1D2A;
+   -webkit-text-stroke-color: #F8FAFC;
 }
 
 .customOutlineDark {
   color: transparent;
   -webkit-text-stroke-width: 1px;
- -webkit-text-stroke-color: #F8FAFC;
+ -webkit-text-stroke-color: #0F1D2A;
 }
   
   @keyframes gradient-animation {
